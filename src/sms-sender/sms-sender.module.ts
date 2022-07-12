@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { SmsSenderService } from './sms-sender.service';
 import { SmsSenderController } from './sms-sender.controller';
 import { HttpModule } from '@nestjs/axios';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [HttpModule, JwtModule],
+  imports: [HttpModule],
   providers: [SmsSenderService],
   controllers: [SmsSenderController],
 })
