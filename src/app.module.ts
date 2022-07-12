@@ -9,10 +9,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 config();
 
-if (!process.env.SECRET_KEY) {
-  throw new Error('Added SECRET_KEY to .env file!!');
-}
-
 @Module({
   imports: [
     ConfigModule.forRoot({
