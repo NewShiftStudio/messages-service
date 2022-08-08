@@ -14,22 +14,25 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
-      transport: Transport.KAFKA,
+      transport: Transport.TCP,
       options: {
-        client: {
-          clientId: 'messages',
-          brokers: ['localhost:9092'],
-          ssl: process.env.NODE_END === 'production',
-          sasl: {
-            mechanism: 'plain',
-            username: process.env.KAFKA_USERNAME,
-            password: process.env.KAFKA_PASSWORD,
-          },
-        },
-        consumer: {
-          groupId: 'messages-consumer',
-        },
+        port: 5052,
       },
+      // options: {
+      //   client: {
+      //     clientId: 'messages',
+      //     brokers: ['localhost:9092'],
+      //     ssl: process.env.NODE_END === 'production',
+      //     sasl: {
+      //       mechanism: 'plain',
+      //       username: process.env.KAFKA_USERNAME,
+      //       password: process.env.KAFKA_PASSWORD,
+      //     },
+      //   },
+      //   consumer: {
+      //     groupId: 'messages-consumer',
+      //   },
+      // },
     },
   );
 
