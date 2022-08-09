@@ -12,7 +12,8 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        port: 5052,
+        host: 'localhost',
+        port: +process.env.PORT,
       },
     },
   );
