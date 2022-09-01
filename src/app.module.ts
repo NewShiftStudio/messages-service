@@ -19,10 +19,10 @@ if (!process.env.PORT) throw new Error('Added PORT to .env file !!');
     }),
     MailerModule.forRoot({
       transport: {
-        service: process.env.MAILER_SERVICE,
+        service: process.env.EMAIL_SERVICE,
         auth: {
-          user: process.env.MAILER_USER,
-          pass: process.env.MAILER_PASSWORD,
+          user: process.env.EMAIL_AUTH_USER,
+          pass: process.env.EMAIL_AUTH_PASSWORD,
         },
       },
     }),
