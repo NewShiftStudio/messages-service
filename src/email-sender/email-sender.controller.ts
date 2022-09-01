@@ -10,6 +10,6 @@ export class EmailSenderController {
 
   @MessagePattern('send-email')
   sendEmail(@Payload() dto: SendEmailDto) {
-    return this.emailService.sendEmail(dto.email, dto.content);
+    return this.emailService.sendEmail(dto);
   }
 }
