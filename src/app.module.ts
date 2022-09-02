@@ -14,6 +14,7 @@ const requiredEnvs = [
   'EMAIL_SERVICE',
   'EMAIL_AUTH_USER',
   'EMAIL_AUTH_PASSWORD',
+  'SMS_SERVICE_API_KEY',
 ];
 
 requiredEnvs.forEach((envKey) => {
