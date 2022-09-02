@@ -1,5 +1,6 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { Controller } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+
 import { SendEmailDto } from './dto/send-email.dto';
 import { EmailSenderService } from './email-sender.service';
 
@@ -7,10 +8,8 @@ import { EmailSenderService } from './email-sender.service';
 export class EmailSenderController {
   constructor(private emailService: EmailSenderService) {}
 
-  @ApiOkResponse()
-  @HttpCode(HttpStatus.OK)
-  @Post('send-email')
-  sendSms(@Body() dto: SendEmailDto) {
-    return this.emailService.sendEmail(dto.email, dto.content);
+  @MessagePattern('send-email')
+  sendEmail(@Payload() dto: SendEmailDto) {
+    return this.emailService.sendEmail(dto);
   }
 }

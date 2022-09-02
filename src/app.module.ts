@@ -9,7 +9,19 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 config();
 
-if (!process.env.PORT) throw new Error('Added PORT to .env file !!');
+const requiredEnvs = [
+  'PORT',
+  'EMAIL_SERVICE',
+  'EMAIL_AUTH_USER',
+  'EMAIL_AUTH_PASSWORD',
+  'SMS_SERVICE_API_KEY',
+];
+
+requiredEnvs.forEach((envKey) => {
+  if (!process.env[envKey]) {
+    throw new Error(`Added ${envKey} to .env file !!`);
+  }
+});
 
 @Module({
   imports: [
@@ -19,10 +31,10 @@ if (!process.env.PORT) throw new Error('Added PORT to .env file !!');
     }),
     MailerModule.forRoot({
       transport: {
-        service: process.env.MAILER_SERVICE,
+        service: process.env.EMAIL_SERVICE,
         auth: {
-          user: process.env.MAILER_USER,
-          pass: process.env.MAILER_PASSWORD,
+          user: process.env.EMAIL_AUTH_USER,
+          pass: process.env.EMAIL_AUTH_PASSWORD,
         },
       },
     }),
