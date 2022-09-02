@@ -6,6 +6,8 @@ import { EmailSenderModule } from './email-sender/email-sender.module';
 import { ConfigModule } from '@nestjs/config';
 import { config } from 'dotenv';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 config();
 
@@ -42,6 +44,12 @@ requiredEnvs.forEach((envKey) => {
     EmailSenderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

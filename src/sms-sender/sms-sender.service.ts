@@ -1,12 +1,9 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom, map } from 'rxjs';
+import { SendSmsResponseDto } from './dto/send-sms-response.dto';
 import { config } from 'dotenv';
 config();
-
-if (!process.env.SMS_SERVICE_API_KEY) {
-  throw new Error('Added to .env SMS_SERVICE_API_KEY !!');
-}
 
 @Injectable()
 export class SmsSenderService {
@@ -14,18 +11,25 @@ export class SmsSenderService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  sendSms(phone: string, msg: string) {
-    return firstValueFrom(
+  async sendSms(phone: string, msg: string) {
+    const res = await firstValueFrom<SendSmsResponseDto>(
       this.httpService
         .get(this.SMS_BASE_URL, {
           params: {
             to: phone,
             msg,
-            json: 1,
+            json: 1, // формат данных
           },
         })
         .pipe(map((res) => res.data))
         .pipe(catchError((_, caught) => caught)),
     );
+
+    // такой объект возвращает sms.ru
+    if (res?.sms[phone]?.status === 'ERROR') {
+      throw new BadRequestException(res?.sms?.status_text);
+    }
+
+    return res;
   }
 }
