@@ -27,7 +27,9 @@ export class SmsSenderService {
 
     // такой объект возвращает sms.ru
     if (res?.sms[phone]?.status === 'ERROR') {
-      throw new BadRequestException(res?.sms?.status_text);
+      throw new BadRequestException(
+        res?.sms?.status_text || 'Произошла ошибка на стороне sms.ru',
+      );
     }
 
     return res;
