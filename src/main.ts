@@ -22,6 +22,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   await app.listen();
+
+  console.log('MESSAGES SERVICE LISTEN: ' + process.env.PORT);
 }
 
 bootstrap();
