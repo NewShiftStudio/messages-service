@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { config } from 'dotenv';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { SmsSenderModule } from './features/sms-sender/sms-sender.module';
 import { EmailSenderModule } from './features/email-sender/email-sender.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { SentryInterceptor } from './common/interceptors/sentry.interceptor';
 
 config();
 
@@ -44,12 +43,14 @@ requiredEnvs.forEach((envKey) => {
     SmsSenderModule,
     EmailSenderModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: SentryInterceptor,
     },
   ],
 })
