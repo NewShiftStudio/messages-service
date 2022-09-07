@@ -1,8 +1,10 @@
 import { HttpService } from '@nestjs/axios';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { catchError, firstValueFrom, map } from 'rxjs';
-import { SendSmsResponseDto } from './dto/send-sms-response.dto';
 import { config } from 'dotenv';
+
+import { SendSmsResponseDto } from './dto/send-sms-response.dto';
+
 config();
 
 @Injectable()

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { SmsSenderModule } from './sms-sender/sms-sender.module';
-import { EmailSenderModule } from './email-sender/email-sender.module';
 import { ConfigModule } from '@nestjs/config';
-import { config } from 'dotenv';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { APP_FILTER } from '@nestjs/core';
+import { config } from 'dotenv';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { SmsSenderModule } from './features/sms-sender/sms-sender.module';
+import { EmailSenderModule } from './features/email-sender/email-sender.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 config();
