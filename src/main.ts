@@ -36,7 +36,7 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        host: 'localhost',
+        host: process.env.HOST,
         port: +process.env.PORT,
       },
     },
@@ -51,7 +51,6 @@ async function bootstrap() {
       tracesSampleRate: 1.0,
     });
   }
-
   await app.listen();
   console.log('MESSAGES SERVICE LISTEN: ' + process.env.PORT);
 }
