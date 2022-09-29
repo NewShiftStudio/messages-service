@@ -12,6 +12,7 @@ config();
 
 const envs = [
   'PORT',
+  'HOST',
   'NODE_ENV',
   'SMS_SERVICE_API_KEY',
   'EMAIL_AUTH_USER',
