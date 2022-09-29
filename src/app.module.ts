@@ -11,20 +11,6 @@ import { SentryInterceptor } from './common/interceptors/sentry.interceptor';
 
 config();
 
-const requiredEnvs = [
-  'PORT',
-  'EMAIL_SERVICE',
-  'EMAIL_AUTH_USER',
-  'EMAIL_AUTH_PASSWORD',
-  'SMS_SERVICE_API_KEY',
-];
-
-requiredEnvs.forEach((envKey) => {
-  if (!process.env[envKey]) {
-    throw new Error(`Added ${envKey} to .env file !!`);
-  }
-});
-
 @Module({
   imports: [
     ConfigModule.forRoot({
