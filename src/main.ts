@@ -17,7 +17,8 @@ const envs = [
   'SMS_SERVICE_API_KEY',
   'EMAIL_AUTH_USER',
   'EMAIL_AUTH_PASSWORD',
-  'EMAIL_SERVICE',
+  'EMAIL_SERVICE_HOST',
+  'EMAIL_SERVICE_PORT',
 ];
 
 const requiredEnvs = getRequiredEnvsByNodeEnv(
