@@ -18,6 +18,7 @@ const envs = [
   'EMAIL_AUTH_USER',
   'EMAIL_AUTH_PASSWORD',
   'EMAIL_SERVICE',
+  'EMAIL_SERVICE_PORT',
 ];
 
 const requiredEnvs = getRequiredEnvsByNodeEnv(
