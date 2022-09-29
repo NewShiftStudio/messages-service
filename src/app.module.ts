@@ -19,7 +19,7 @@ config();
     }),
     MailerModule.forRoot({
       transport: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
         port: +process.env.EMAIL_SERVICE_PORT,
         host: process.env.EMAIL_SERVICE_HOST,
         auth: {
