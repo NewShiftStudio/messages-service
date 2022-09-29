@@ -33,9 +33,9 @@ requiredEnvs.forEach((envKey) => {
     }),
     MailerModule.forRoot({
       transport: {
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
         port: +process.env.EMAIL_SERVICE_PORT,
-        service: process.env.EMAIL_SERVICE,
+        host: process.env.EMAIL_SERVICE_HOST,
         auth: {
           user: process.env.EMAIL_AUTH_USER,
           pass: process.env.EMAIL_AUTH_PASSWORD,
